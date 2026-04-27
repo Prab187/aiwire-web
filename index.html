@@ -68,12 +68,28 @@
   </div>
 
   <script>
+    // Aggressively unregister any old service worker so updates appear immediately.
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.getRegistrations().then(function (regs) {
+        for (var r of regs) { r.unregister(); }
+      });
+      caches.keys().then(function (keys) {
+        for (var k of keys) { caches.delete(k); }
+      });
+    }
     window.addEventListener('flutter-first-frame', function () {
       var l = document.getElementById('aw-loader');
       if (l) l.style.display = 'none';
     });
   </script>
 
-  <script src="flutter_bootstrap.js" async></script>
+  <script>
+    // Cache-bust: append the current minute to bypass stale CDN copies
+    var v = Math.floor(Date.now() / 60000);
+    var s = document.createElement('script');
+    s.src = 'flutter_bootstrap.js?v=' + v;
+    s.async = true;
+    document.body.appendChild(s);
+  </script>
 </body>
 </html>
