@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="/aiwire-web/">
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#8B5CF6">
+
+  <!-- SEO -->
+  <title>AIWire — Land your AI job in 90 days</title>
+  <meta name="description" content="The career hub for AI work. 12,847 open AI roles. Personalized roadmap. Match score on every listing. Free to start.">
+  <meta name="keywords" content="AI jobs, prompt engineer jobs, ML engineer jobs, AI career, machine learning careers, AI training, mock interview AI, resume AI scan, claude ai">
+  <meta name="author" content="AIWire">
+  <link rel="canonical" href="https://prab187.github.io/aiwire-web/">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://prab187.github.io/aiwire-web/">
+  <meta property="og:title" content="AIWire — Land your AI job in 90 days">
+  <meta property="og:description" content="12,847 open AI roles. Personalized roadmap. Match score on every listing. Free to start.">
+  <meta property="og:image" content="https://prab187.github.io/aiwire-web/icons/Icon-512.png">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="AIWire — Land your AI job in 90 days">
+  <meta name="twitter:description" content="The career hub for AI work. Powered by Claude.">
+  <meta name="twitter:image" content="https://prab187.github.io/aiwire-web/icons/Icon-512.png">
+
+  <!-- iOS / Android home screen -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="AIWire">
+  <link rel="apple-touch-icon" href="icons/Icon-192.png">
+
+  <link rel="icon" type="image/png" href="favicon.png"/>
+  <link rel="manifest" href="manifest.json">
+
+  <style>
+    body { margin: 0; background: #FFFFFF; }
+    @media (prefers-color-scheme: dark) { body { background: #0A0A0A; } }
+    .aiwire-loader {
+      position: fixed; inset: 0; display: flex; align-items: center; justify-content: center;
+      flex-direction: column; gap: 18px; font-family: -apple-system, system-ui, sans-serif;
+      background: linear-gradient(135deg, rgba(139,92,246,0.05), rgba(99,102,241,0.02));
+    }
+    .aiwire-loader .spinner {
+      width: 38px; height: 38px; border: 3px solid rgba(139,92,246,0.15);
+      border-top-color: #8B5CF6; border-radius: 50%;
+      animation: aw-spin 0.9s linear infinite;
+    }
+    .aiwire-loader .label { color: #6B7280; font-size: 13px; letter-spacing: 0.3px; }
+    .aiwire-loader .brand { color: #1F2937; font-weight: 700; font-size: 22px; letter-spacing: -0.4px; }
+    @media (prefers-color-scheme: dark) {
+      .aiwire-loader .brand { color: #F9FAFB; }
+      .aiwire-loader .label { color: #9CA3AF; }
+    }
+    @keyframes aw-spin { to { transform: rotate(360deg); } }
+  </style>
+</head>
+<body>
+  <div class="aiwire-loader" id="aw-loader">
+    <div class="brand">AIWire</div>
+    <div class="spinner"></div>
+    <div class="label">Loading the career hub for AI work…</div>
+  </div>
+
+  <script>
+    window.addEventListener('flutter-first-frame', function () {
+      var l = document.getElementById('aw-loader');
+      if (l) l.style.display = 'none';
+    });
+  </script>
+
+  <script src="flutter_bootstrap.js" async></script>
+</body>
+</html>

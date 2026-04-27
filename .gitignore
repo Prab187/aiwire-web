@@ -1,0 +1,11 @@
+# Build artifacts (regenerated from source)
+.last_build_id
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+
+# Logs
+*.log
