@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AIWire Proxy Test</title>
+  <style>
+    body { font-family: -apple-system, system-ui, sans-serif; padding: 40px; max-width: 700px; margin: 0 auto; background: #0A0A0A; color: #F9FAFB; line-height: 1.6; }
+    h1 { font-size: 22px; margin-bottom: 8px; }
+    p { color: #9CA3AF; }
+    button { background: #8B5CF6; color: white; border: 0; padding: 12px 22px; border-radius: 10px; font-size: 14px; font-weight: 700; cursor: pointer; }
+    button:hover { background: #7C3AED; }
+    pre { background: #1F2937; padding: 16px; border-radius: 8px; font-size: 12px; overflow-x: auto; white-space: pre-wrap; word-break: break-all; max-height: 400px; overflow-y: auto; }
+    .ok { color: #10B981; }
+    .bad { color: #EF4444; }
+    .step { margin: 20px 0; padding: 16px; background: #1F2937; border-radius: 10px; }
+  </style>
+</head>
+<body>
+  <h1>AIWire Proxy Test</h1>
+  <p>This page tests the Cloudflare worker directly, bypassing Flutter. Click the button — watch the result.</p>
+
+  <button onclick="runTest()">Run test</button>
+
+  <div id="out"></div>
+
+  <script>
+    const PROXY = 'https://aiwire-proxy.prab187.workers.dev';
+
+    async function runTest() {
+      const out = document.getElementById('out');
+      out.innerHTML = '<div class="step">⏳ Calling proxy at <code>' + PROXY + '</code>...</div>';
+
+      const startedAt = Date.now();
+      try {
+        const r = await fetch(PROXY, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            model: 'claude-haiku-4-5',
+            max_tokens: 30,
+            messages: [{ role: 'user', content: 'reply with one word: working' }],
+          }),
+        });
+        const elapsed = Date.now() - startedAt;
+        const text = await r.text();
+        const ok = r.ok && text.includes('"type":"message"');
+
+        out.innerHTML = `
+          <div class="step">
+            <strong>HTTP status:</strong> <span class="${ok ? 'ok' : 'bad'}">${r.status} ${r.statusText}</span><br/>
+            <strong>Time:</strong> ${elapsed}ms<br/>
+            <strong>Result:</strong> <span class="${ok ? 'ok' : 'bad'}">${ok ? '✓ WORKING — Claude responded' : '✗ FAILED'}</span>
+          </div>
+          <div class="step">
+            <strong>Response body:</strong>
+            <pre>${escapeHtml(text)}</pre>
+          </div>
+          <div class="step">
+            <strong>Response headers:</strong>
+            <pre>${[...r.headers.entries()].map(([k, v]) => k + ': ' + v).join('\n')}</pre>
+          </div>
+        `;
+      } catch (err) {
+        const elapsed = Date.now() - startedAt;
+        out.innerHTML = `
+          <div class="step">
+            <strong>Result:</strong> <span class="bad">✗ FETCH FAILED</span><br/>
+            <strong>Time:</strong> ${elapsed}ms<br/>
+            <strong>Error:</strong> <span class="bad">${escapeHtml(String(err))}</span>
+          </div>
+          <div class="step">
+            <p>This means the browser couldn't even reach the proxy. Common causes:</p>
+            <ul>
+              <li>VPN / corporate firewall blocking <code>workers.dev</code></li>
+              <li>Browser extension (ad blocker, Ghostery, Privacy Badger) blocking the request</li>
+              <li>DNS resolution failure</li>
+              <li>Cloudflare worker is genuinely down</li>
+            </ul>
+            <p>Try: disable extensions, switch DNS, try a different network.</p>
+          </div>
+        `;
+      }
+    }
+
+    function escapeHtml(s) {
+      return s.replace(/[&<>"']/g, c => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    }
+  </script>
+</body>
+</html>
