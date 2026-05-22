@@ -35850,7 +35850,7 @@ case 6:if(!(l<=a3)){s=8
 break}a=A.b([],c)
 k=new A.mr(a)
 p=10
-a=A.bD("https://api.anthropic.com/v1/messages",0,null)
+a=A.bD("https://aiwire-proxy.prab187.workers.dev",0,null)
 j=A.H(a5,a5)
 J.mi(j,"Content-Type","application/json")
 J.mi(j,"x-api-key",a7)
@@ -36137,7 +36137,7 @@ p=B.b.gT(a.b.split("."))
 o=p.toLowerCase()==="pdf"
 if(o){p=t.N
 n=A.I(["type","document","source",A.I(["type","base64","media_type","application/pdf","data",B.i_.gGK().cM(i)],p,p)],p,t.z)}else n=A.bpP(i)
-p=A.bD("https://api.anthropic.com/v1/messages",0,null)
+p=A.bD("https://aiwire-proxy.prab187.workers.dev",0,null)
 m=t.N
 l=A.H(m,m)
 l.n(0,"Content-Type","application/json")
@@ -58686,7 +58686,7 @@ break}b4=A.b([],a7)
 i=new A.mr(b4)
 p=7
 s=10
-return A.j(i.pf("POST",A.bD("https://api.anthropic.com/v1/messages",0,null),A.I(["Content-Type","application/json","x-api-key","proxy","anthropic-version","2023-06-01"],a3,a3),B.E.ha(A.I(["model","claude-haiku-4-5","max_tokens",1600,"messages",A.b([A.I(["role","user","content",l],a3,a3)],a5)],a3,a6)),null).eU(B.kA),$async$uD)
+return A.j(i.pf("POST",A.bD("https://aiwire-proxy.prab187.workers.dev",0,null),A.I(["Content-Type","application/json","x-api-key","proxy","anthropic-version","2023-06-01"],a3,a3),B.E.ha(A.I(["model","claude-haiku-4-5","max_tokens",1600,"messages",A.b([A.I(["role","user","content",l],a3,a3)],a5)],a3,a6)),null).eU(B.kA),$async$uD)
 case 10:k=d0
 n=[5]
 s=8
@@ -60570,7 +60570,7 @@ s=1
 break}a=a1.length!==0?a1:"(no extended description \u2014 infer from title)"
 l='Summarize this AI news article in exactly 4 concise bullet points. Each bullet starts with "\u2022 " and is a single short sentence. Cover: the core news, who\'s involved, the key insight, and why it matters. No preamble, no headers \u2014 just 4 bullets.\n\nTitle: '+a0+"\n\n"+a
 p=5
-a=A.bD("https://api.anthropic.com/v1/messages",0,null)
+a=A.bD("https://aiwire-proxy.prab187.workers.dev",0,null)
 e=t.N
 d=A.I(["Content-Type","application/json","x-api-key","proxy","anthropic-version","2023-06-01"],e,e)
 s=8
